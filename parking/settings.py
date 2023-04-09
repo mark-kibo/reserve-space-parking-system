@@ -155,3 +155,5 @@ CRONJOBS = [    ('0 0 * * *', 'yourappname.views.update_space_availability'),]
 # Google Maps API key
 GOOGLE_MAPS_API_KEY = 'AIzaSyDBq8Dq8LSysLUuMa80PVsOqO2ZA33AZWw"'
 
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = ['https://reservespace-production.up.railway.app/']
