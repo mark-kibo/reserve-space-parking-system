@@ -250,7 +250,7 @@ function stop() {
 
     document.getElementById('startButton').addEventListener('click', function() {
       if (watchID === null) {
-        start();
+        startTracking();
         this.textContent = 'Stop';
       } else {
         stop();
