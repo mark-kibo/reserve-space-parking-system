@@ -80,6 +80,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'parking.wsgi.application'
 
+#railway csrf settings
+CORS_ALLOWED_ORIGINS = [
+    "https://reservespace-production.up.railway.app",
+    # Add any other trusted origins here
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
