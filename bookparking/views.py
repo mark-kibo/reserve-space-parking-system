@@ -261,28 +261,31 @@ def book(request, space_id):
         
     
 def end_book(request, pk):
-    nairobi_tz = pytz.timezone('Africa/Nairobi')
-    now = datetime.now(nairobi_tz)
-    data=Booking.objects.get(id=pk)
-    timedelta = now - data.check_in
-    request.session['param4']=timedelta.total_seconds() / 3600
-    print(timedelta.total_seconds())
-    """if timedelta.total_seconds() < 3600:
+    try:
+        nairobi_tz = pytz.timezone('Africa/Nairobi')
+        now = datetime.now(nairobi_tz)
+        data=Booking.objects.get(id=pk)
+        timedelta = now - data.check_in
+        request.session['param4']=timedelta.total_seconds() / 3600
+        print(timedelta.total_seconds())
+        """if timedelta.total_seconds() < 3600:
+            data.checkout=now
+            data.has_expired=True
+            data.save()    
+            update_space_availability()
+            return redirect('payout', pk)
+        else:
+            messages.info(request, "The time difference is less than or equal to one hour")
+            return redirect('bookings')"""
         data.checkout=now
         data.has_expired=True
+        space=get_object_or_404(ParkingSpace, id=request.session.get('space_id'))
+        space.is_booked=False
+        space.save()
         data.save()    
-        update_space_availability()
         return redirect('payout', pk)
-    else:
-        messages.info(request, "The time difference is less than or equal to one hour")
-        return redirect('bookings')"""
-    data.checkout=now
-    data.has_expired=True
-    space=get_object_or_404(ParkingSpace, id=request.session.get('space_id'))
-    space.is_booked=False
-    space.save()
-    data.save()    
-    return redirect('payout', pk)
+    except:
+        return redirect('bookings')
    
 
 def payout(request, pk):
