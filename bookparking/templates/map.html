@@ -112,7 +112,7 @@
       </div>
     </center>
 
-    <button id="startButton">Start</button>
+    <button id="startButton" onclick="startTracking()">Start</button>
 
       
     <div class="container">
@@ -240,23 +240,6 @@
     alert("Geolocation is not supported by this browser.");
   }
 }
-
-function stop() {
-      if (watchID !== null) {
-        navigator.geolocation.clearWatch(watchID);
-        watchID = null;
-      }
-    }
-
-    document.getElementById('startButton').addEventListener('click', function() {
-      if (watchID === null) {
-        startTracking();
-        this.textContent = 'Stop';
-      } else {
-        stop();
-        this.textContent = 'Start';
-      }
-    });
 
 
 
