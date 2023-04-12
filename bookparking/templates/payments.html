@@ -88,36 +88,35 @@
         {% endfor %}
         {% endif %}
         {{response}}
-          <center><p>Today Payment details:</p></center>
-          <table border="1.0" id="table_id">
-            <thead style="color:black;">
-                <tr class="fs-5">
-                    <th>Space name</th>
-                    <th>Amount</th>
-                    <th>Payment method</th> 
-                    <th>Status</th>
-                </tr>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>Space name</th>
+                <th>Amount</th>
+                <th>Payment method</th> 
+                <th>Status</th>
+              </tr>
             </thead>
             <tbody>
-                 {% if pay_obj %}
+              {% if pay_obj %}
                 {% for obj in pay_obj %} 
-                <tr>
-                   <td>{{obj.space.name}}</td>
-                   <td>{{obj.payment_amount}}</td>
-                   <td>{{obj.payment_method}}</td>
+                  <tr>
+                    <td>{{obj.space.name}}</td>
+                    <td>{{obj.payment_amount}}</td>
+                    <td>{{obj.payment_method}}</td>
                     {% if obj.payment_status == "paid" %} 
-                    <td ><a href="{% url 'receipt' obj.id%}" class="btn btn-success"><button>Ticket</button></a></td> 
+                      <td><a href="{% url 'receipt' obj.id%}" class="btn btn-success"><button>Ticket</button></a></td> 
                     {% else %}
-                    <td ><a href="{% url 'updatepay' obj.id %}" class="btn btn-primary"><button>pay to get ticket</button></a></td>
+                      <td><a href="{% url 'updatepay' obj.id %}" class="btn btn-primary"><button>pay to get ticket</button></a></td>
                     {% endif %}
-
-                    </td>
-                </tr>
-
+                  </tr>
                 {% endfor %}
-                {% endif %}
+              {% endif %}
             </tbody>
-        </table>
+          </table>
+        </div>
+        
     
       </div>
 		</section>

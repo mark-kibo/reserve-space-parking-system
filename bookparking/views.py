@@ -66,7 +66,7 @@ def billing_receipt(request, pk):
      # Create data for table
     data = [
         
-        ["Transaction_id", "Location", "space name", "Paid amount",  "payment date"],
+        ["Transaction_id", "space name", "Paid amount",  "payment date"],
         [Transaction_id, location,space,  f"${amount:.2f}"], payment_date]
 
       # Set style for title
