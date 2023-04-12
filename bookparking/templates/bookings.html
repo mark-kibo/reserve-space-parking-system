@@ -89,85 +89,79 @@
         {% endif %}
         {{response}}
           <center><p>Booking Details:</p></center>
-          <table border="1.0" id="table_id">
-            <thead style="color:black;">
-                <tr class="fs-5">
-                    <th>Location</th>
-                    <th>Space name</th>
-                    <th>start time</th>
-                    <th>endtime</th>
-                    <th>status</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                    <th>Endbook</th>
-                    <th>Directions</th> 
-                </tr>
-            </thead>
-            <tbody>
-                {% for book in booking %}
-                <tr>
-                    <td>{{  book.space.location.name  }}</td>
-                    <td>{{ book.space.name }}</td>
-                    <td>{{ book.check_in }}</td>
-                    <td>{{ book.checkout }}</td>
-                    {% if book.is_expired == False %} 
-                    <td > <p class="btn btn-success" > active</p></td> 
-                    {% elif book.is_expired == True %}
-
-                    <td ><p class="btn btn-danger">expired</p></td>{% endif %}
-                    <td>
-                
-                      {% if book.is_expired == True %} 
-                      <a href="{% url 'update' book.id %}">
-                        <button class="btn btn-primary" disabled>Update</button>
-                    </a>
-                      {% elif book.is_expired == False %}
-                      <a href="{% url 'update' book.id %}" >
-                        <button class="btn btn-primary"> Update</button>
-                       
-                    </a>
-                      {% endif %}
-
-                    </td>
-                    <td>
-                      {% if book.is_expired == True %} 
-                      <a href="">
-                        <button disabled class="btn btn-primary">Delete</button>
-                        
-                    </a>
-                      {% elif book.is_expired == False %}
-                      <a href="{% url 'delete_booking' book.id book.space.id %}" >
-                        <button class="btn btn-danger">Delete</button>
-                       
-                    </a>
-                      {% endif %}
-                  </td>
-                  {% if book.is_expired == True %} 
-                  <td><button class="btn btn-primary" disabled>endbook</button></td>
-                  {% elif book.is_expired == False %}
-                  <td><a href="{% url 'end_book' book.id %}"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">endbook</button></a></td>
-                  {% endif %}
-                  {% if book.is_expired == True %} 
-                  <td>
-                    <a href="">
-                      <button disabled class="btn btn-primary">Directions</button>
-                      
-                  </a>
-                  </td>
-                  {% elif book.is_expired == False %}
-                  <td>
-                      <a href="{% url 'maps' book.id %}" >
-                        <button class="btn btn-success">Directions</button>
-                       
-                    </a>
-                  </td>
-                  {% endif %}
-                    
-
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>Location</th>
+                        <th>Space name</th>
+                        <th>Start time</th>
+                        <th>End time</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>End book</th>
+                        <th>Directions</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in booking %}
+                    <tr>
+                        <td>{{  book.space.location.name  }}</td>
+                        <td>{{ book.space.name }}</td>
+                        <td>{{ book.check_in }}</td>
+                        <td>{{ book.checkout }}</td>
+                        {% if book.is_expired == False %} 
+                        <td> <p class="btn btn-success">Active</p></td> 
+                        {% elif book.is_expired == True %}
+                        <td><p class="btn btn-danger">Expired</p></td>
+                        {% endif %}
+                        <td>
+                            {% if book.is_expired == True %} 
+                            <a href="{% url 'update' book.id %}">
+                                <button class="btn btn-primary" disabled>Update</button>
+                            </a>
+                            {% elif book.is_expired == False %}
+                            <a href="{% url 'update' book.id %}" >
+                                <button class="btn btn-primary">Update</button>
+                            </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if book.is_expired == True %} 
+                            <a href="">
+                                <button disabled class="btn btn-primary">Delete</button>
+                            </a>
+                            {% elif book.is_expired == False %}
+                            <a href="{% url 'delete_booking' book.id book.space.id %}" >
+                                <button class="btn btn-danger">Delete</button>
+                            </a>
+                            {% endif %}
+                        </td>
+                        {% if book.is_expired == True %} 
+                        <td><button class="btn btn-primary" disabled>End book</button></td>
+                        {% elif book.is_expired == False %}
+                        <td><a href="{% url 'end_book' book.id %}"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">End book</button></a></td>
+                        {% endif %}
+                        {% if book.is_expired == True %} 
+                        <td>
+                            <a href="">
+                                <button disabled class="btn btn-primary">Directions</button>
+                            </a>
+                        </td>
+                        {% elif book.is_expired == False %}
+                        <td>
+                            <a href="{% url 'maps' book.id %}" >
+                                <button class="btn btn-success">Directions</button>
+                            </a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
     
       </div>
 		</section>
