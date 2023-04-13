@@ -67,7 +67,7 @@ def billing_receipt(request, pk):
     data = [
         
         ["Transaction_id", "space name", "Paid amount",  "payment date"],
-        [Transaction_id, location,space,  f"${amount:.2f}"], payment_date]
+        [Transaction_id, location,space,  f"Ksh{amount:.2f}"], payment_date]
 
       # Set style for title
     styles = getSampleStyleSheet()
